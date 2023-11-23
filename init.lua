@@ -83,7 +83,15 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          ensure_installed = {
+            "eslint-lsp",
+            "prettier",
+          }
+        }
+      },
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
@@ -275,9 +283,24 @@ require('lazy').setup({
   },
 
   -- Bufferline (tabline)
-  { 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
-                                                                                              opts = {
-      options = { diagnostics = "nvim_lsp", separator_style = "slanted" } } },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    opts = {
+      options = { diagnostics = "nvim_lsp", separator_style = "slanted" } }
+  },
+
+  {
+    'mhartington/formatter.nvim',
+    event = "VeryLazy",
+    opts = function()
+      require "custom.plugins.formatter"
+    end
+
+  },
+
+  { 'w0rp/ale' },
 
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -305,6 +328,12 @@ local theme = {
   win = 'TabLine',
   tail = 'TabLine',
 }
+
+vim.g.ale_fixers = { javascript = { 'prettier', 'eslint' } }
+vim.g.ale_sign_error = '❌'
+vim.g.ale_sign_warning = '⚠️'
+vim.g.ale_fix_on_save = 1
+vim.g.ale_set_balloons = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

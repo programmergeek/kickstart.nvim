@@ -259,6 +259,21 @@ require('lazy').setup({
     ft = { "markdown" },
   },
 
+  -- Synthwave colorscheme
+  {
+    'maxmx03/fluoromachine.nvim',
+    config = function()
+      local fm = require 'fluoromachine'
+
+      fm.setup {
+        glow = false,
+        theme = 'fluoromachine'
+      }
+
+      vim.cmd.colorscheme 'fluoromachine'
+    end
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.

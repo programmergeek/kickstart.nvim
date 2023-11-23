@@ -274,8 +274,11 @@ require('lazy').setup({
     end
   },
 
-  -- Tabby (tabline)
-  { 'nanozuki/tabby.nvim' },
+  -- Bufferline (tabline)
+  { 'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
+                                                                                              opts = {
+      options = { diagnostics = "nvim_lsp", separator_style = "slanted" } } },
+
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -303,45 +306,6 @@ local theme = {
   tail = 'TabLine',
 }
 
-require('tabby.tabline').set(function(line)
-  return {
-    {
-      { ' ≋ ', hl = theme.head },
-      line.sep('', theme.head, theme.fill),
-    },
-    line.tabs().foreach(function(tab)
-      local hl = tab.is_current() and theme.current_tab or theme.tab
-      return {
-        line.sep('', hl, theme.fill),
-        tab.is_current() and '' or '◎',
-        tab.number(),
-        tab.name(),
-        -- tab.close_btn(''), -- show a close button
-        line.sep('', hl, theme.fill),
-        hl = hl,
-        margin = ' ',
-      }
-    end),
-    line.spacer(),
-    -- shows list of windows in tab
-    -- line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-    --   return {
-    --     line.sep('', theme.win, theme.fill),
-    --     win.is_current() and '' or '',
-    --     win.buf_name(),
-    --     line.sep('', theme.win, theme.fill),
-    --     hl = theme.win,
-    --     margin = ' ',
-    --   }
-    -- end),
-    {
-      line.sep('', theme.tail, theme.fill),
-      { '  ', hl = theme.tail },
-    },
-    hl = theme.fill,
-  }
-end)
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -354,6 +318,9 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
+-- Keep multiple tabs
+vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
 
 -- Always show tabline
 vim.o.showtabline = 2
@@ -628,7 +595,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {

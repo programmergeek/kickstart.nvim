@@ -300,7 +300,7 @@ require('lazy').setup({
 
   },
 
-  { 'w0rp/ale' },
+  -- { 'dense-analysis/ale' },
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -311,11 +311,15 @@ require('lazy').setup({
     },
   },
 
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+  }
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -327,22 +331,39 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
-local theme = {
-  fill = 'TabLineFill',
-  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
-  head = 'TabLine',
-  -- current_tab = 'TabLineSel',
-  current_tab = { fg = '#F8FBF6', bg = '#896a98', style = 'italic' },
-  tab = 'TabLine',
-  win = 'TabLine',
-  tail = 'TabLine',
-}
+  require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+    -- Use a sub-list to run only the first available formatter
+    javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        css = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+  },
+  format_on_save = {
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 500,
+      },
+})
 
-vim.g.ale_fixers = { javascript = { 'prettier', 'eslint' } }
-vim.g.ale_sign_error = '❌'
-vim.g.ale_sign_warning = '⚠️'
-vim.g.ale_fix_on_save = 1
-vim.g.ale_set_balloons = 1
+--vim.g.ale_fixers = {
+--  ['javascript'] = { 'prettier', 'eslint' },
+--  ['typescript'] = { 'prettier', 'eslint' },
+--  ['jsx'] = { 'prettier', 'eslint' },
+--  ['tsx'] = { 'prettier', 'eslint' },
+--}
+--vim.g.ale_sign_error = '❌'
+--vim.g.ale_sign_warning = '⚠️'
+--vim.g.ale_fix_on_save = 1
+--vim.g.ale_set_balloons = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -387,6 +408,9 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- Enable cursorline
+vim.o.cursorline = true
+
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
@@ -416,6 +440,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Highlight the current line number
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#FF00FF' })
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -589,6 +616,25 @@ local on_attach = function(_, bufnr)
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+  local _border = "rounded"
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+      border = _border
+    }
+  )
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+      border = _border
+    }
+  )
+
+  vim.diagnostic.config {
+    float = { border = _border }
+  }
+
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

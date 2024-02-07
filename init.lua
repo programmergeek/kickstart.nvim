@@ -436,6 +436,11 @@ vim.o.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.o.breakindent = true
 
+-- use 2 spaces instead of tab for indentation
+vim.o.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+
 -- Save undo history
 vim.o.undofile = true
 
@@ -464,6 +469,11 @@ vim.o.termguicolors = true
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Toggle NeoTree
+vim.keymap.set('n', '<leader>\\', function()
+  require('neo-tree.command').execute { position = 'left', toggle = true }
+end, { silent = true, desc = 'Toggle file tree' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

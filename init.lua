@@ -384,6 +384,57 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'mfussenegger/nvim-jdtls',
+  },
+
+  -- Symbol Outline
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
+
+  -- window layout
+  {
+    'folke/edgy.nvim',
+    event = 'VeryLazy',
+    opts = {
+      left = {
+        -- Neo-tree filesystem always takes half the screen height
+        {
+          title = 'File Tree',
+          ft = 'neo-tree',
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == 'filesystem'
+          end,
+          size = { height = 0.5 },
+        },
+        {
+          title = 'Git Status',
+          ft = 'neo-tree',
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == 'git_status'
+          end,
+          pinned = true,
+          open = 'Neotree position=right git_status',
+        },
+        {
+          title = 'Outline',
+          ft = 'aerial',
+          pinned = true,
+          open = 'AerialOpen',
+        },
+        -- any other neo-tree windows
+        'neo-tree',
+      },
+    },
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -398,6 +449,26 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
+
+local config = {
+  cmd = { '/home/will/.local/share/nvim/mason/bin/jdtls' },
+  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+}
+
+require('jdtls').start_or_attach(config)
+
+require('aerial').setup {
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+  end,
+}
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle!<CR>')
+
+vim.keymap.set('n', '<leader>so', '<cmd>AerialOpen!<CR>')
 
 --vim.g.ale_fixers = {
 --  ['javascript'] = { 'prettier', 'eslint' },
@@ -464,6 +535,12 @@ vim.o.cursorline = true
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+-- Default splitting will cause your main splits to jump when opening an edgebar.
+-- To prevent this, set `splitkeep` to either `screen` or `topline`.
+vim.opt.splitkeep = 'screen'
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -474,6 +551,10 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<leader>\\', function()
   require('neo-tree.command').execute { position = 'left', toggle = true }
 end, { silent = true, desc = 'Toggle file tree' })
+
+vim.keymap.set('n', '<leader>gs', function()
+  require('neo-tree.command').execute { position = 'left', toggle = true, source = 'git_status' }
+end, { silent = true, desc = 'Toggle git status' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

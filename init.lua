@@ -176,7 +176,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'fluoromachine',
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
       },
@@ -275,7 +275,8 @@ require('lazy').setup({
 
       fm.setup {
         glow = false,
-        theme = 'fluoromachine',
+        theme = 'delta',
+        transparent = false,
       }
 
       vim.cmd.colorscheme 'fluoromachine'
@@ -453,6 +454,10 @@ require('lazy').setup({
 local config = {
   cmd = { '/home/will/.local/share/nvim/mason/bin/jdtls' },
   root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+  workspace_folders = { {
+    uri = 'file://home/will/Documents/projects/final-year-project/',
+    name = 'java_projects',
+  } },
 }
 
 require('jdtls').start_or_attach(config)

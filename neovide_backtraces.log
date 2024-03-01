@@ -1,0 +1,84 @@
+2024-02-09 13:43:26 - Neovide panicked with the message 'attempt to calculate the remainder with a divisor of zero'. (File: /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/num/mod.rs; Line: 455, Column: 5)
+   0: <unknown>
+   1: <unknown>
+   2: <unknown>
+   3: <unknown>
+   4: <unknown>
+   5: <unknown>
+   6: <unknown>
+   7: <unknown>
+   8: <unknown>
+   9: <unknown>
+  10: <unknown>
+  11: <unknown>
+  12: <unknown>
+  13: <unknown>
+  14: __libc_start_call_main
+             at ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+  15: __libc_start_main_impl
+             at ./csu/../csu/libc-start.c:392:3
+  16: <unknown>
+
+2024-02-09 13:43:31 - Neovide panicked with the message 'attempt to calculate the remainder with a divisor of zero'. (File: /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/num/mod.rs; Line: 455, Column: 5)
+   0: <unknown>
+   1: <unknown>
+   2: <unknown>
+   3: <unknown>
+   4: <unknown>
+   5: <unknown>
+   6: <unknown>
+   7: <unknown>
+   8: <unknown>
+   9: <unknown>
+  10: <unknown>
+  11: <unknown>
+  12: <unknown>
+  13: <unknown>
+  14: __libc_start_call_main
+             at ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+  15: __libc_start_main_impl
+             at ./csu/../csu/libc-start.c:392:3
+  16: <unknown>
+
+2024-02-09 13:44:00 - Neovide panicked with the message 'attempt to calculate the remainder with a divisor of zero'. (File: /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/num/mod.rs; Line: 455, Column: 5)
+   0: <unknown>
+   1: <unknown>
+   2: <unknown>
+   3: <unknown>
+   4: <unknown>
+   5: <unknown>
+   6: <unknown>
+   7: <unknown>
+   8: <unknown>
+   9: <unknown>
+  10: <unknown>
+  11: <unknown>
+  12: <unknown>
+  13: <unknown>
+  14: __libc_start_call_main
+             at ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+  15: __libc_start_main_impl
+             at ./csu/../csu/libc-start.c:392:3
+  16: <unknown>
+
+2024-02-09 13:44:26 - Neovide panicked with the message 'attempt to calculate the remainder with a divisor of zero'. (File: /rustc/a28077b28a02b92985b3a3faecf92813155f1ea1/library/core/src/num/mod.rs; Line: 455, Column: 5)
+   0: <unknown>
+   1: <unknown>
+   2: <unknown>
+   3: <unknown>
+   4: <unknown>
+   5: <unknown>
+   6: <unknown>
+   7: <unknown>
+   8: <unknown>
+   9: <unknown>
+  10: <unknown>
+  11: <unknown>
+  12: <unknown>
+  13: <unknown>
+  14: __libc_start_call_main
+             at ./csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+  15: __libc_start_main_impl
+             at ./csu/../csu/libc-start.c:392:3
+  16: <unknown>
+

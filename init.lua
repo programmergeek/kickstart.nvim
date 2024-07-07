@@ -434,6 +434,13 @@ require('lazy').setup({
         -- any other neo-tree windows
         'neo-tree',
       },
+      botton = {
+        ft = 'toggleterm',
+        size = { height = 0.3 },
+        filter = function(buf, win)
+          return vim.api.nvim_win_get_config(win).relative == ''
+        end,
+      },
     },
   },
   {
@@ -445,6 +452,11 @@ require('lazy').setup({
   },
   {
     'windwp/nvim-ts-autotag',
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -609,6 +621,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Terminal keymaps
+require('toggleterm').setup {
+  open_mapping = [[<c-t>]],
+}
 
 -- Highlight the current line number
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#FF00FF' })

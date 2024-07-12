@@ -458,6 +458,17 @@ require('lazy').setup({
     version = '*',
     config = true,
   },
+  {
+    'rmagatti/auto-session',
+    dependencies = {
+      'nvim-telescope/telescope.nvim', -- Only needed if you want to use sesssion lens
+    },
+    config = function()
+      require('auto-session').setup {
+        auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      }
+    end,
+  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.

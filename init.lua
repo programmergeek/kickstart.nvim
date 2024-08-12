@@ -386,10 +386,6 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'mfussenegger/nvim-jdtls',
-  },
-
   -- Symbol Outline
   {
     'stevearc/aerial.nvim',
@@ -485,16 +481,13 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
-local config = {
-  cmd = { '/home/will/.local/share/nvim/mason/bin/jdtls' },
-  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
-  workspace_folders = { {
-    uri = 'file://home/will/Documents/projects/final-year-project/',
-    name = 'java_projects',
-  } },
-}
-
-require('jdtls').start_or_attach(config)
+--local config = {
+--  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+--  workspace_folders = { {
+--    uri = 'file://home/will/Documents/projects/final-year-project/',
+--    name = 'java_projects',
+--  } },
+--}
 
 require('nvim-ts-autotag').setup {
   opts = {
@@ -872,7 +865,7 @@ local servers = {
   -- rust_analyzer = {},
   tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  prismals = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },

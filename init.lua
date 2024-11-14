@@ -496,6 +496,9 @@ require('lazy').setup({
 --  } },
 --}
 
+-- Enable autocompletion inside cva
+require 'custom.plugins.cva-autocomplete'
+
 require('nvim-ts-autotag').setup {
   opts = {
     -- Defaults

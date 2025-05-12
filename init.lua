@@ -173,11 +173,19 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Tab size
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- File tree keymaps
 vim.keymap.set('n', '<leader>\\', '<cmd>NvimTreeOpen<CR>', { desc = 'Open file tree' })
+
+-- Bufferline keymaps
+vim.keymap.set('n', '<C-,>', '<cmd>BufferPrevious<CR>', { desc = 'Move to previous tab' })
+vim.keymap.set('n', '<C-.>', '<cmd>BufferNext<CR>', { desc = 'Move to next tab' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

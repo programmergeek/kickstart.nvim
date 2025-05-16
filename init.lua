@@ -184,8 +184,10 @@ vim.o.shiftwidth = 4
 vim.keymap.set('n', '<leader>\\', '<cmd>NvimTreeOpen<CR>', { desc = 'Open file tree' })
 
 -- Bufferline keymaps
-vim.keymap.set('n', '<C-,>', '<cmd>BufferPrevious<CR>', { desc = 'Move to previous tab' })
-vim.keymap.set('n', '<C-.>', '<cmd>BufferNext<CR>', { desc = 'Move to next tab' })
+vim.keymap.set('n', '<', '<cmd>BufferPrevious<CR>', { desc = 'Move to previous tab' })
+vim.keymap.set('n', '>', '<cmd>BufferNext<CR>', { desc = 'Move to next tab' })
+vim.keymap.set('n', '<C-,>', '<cmd>BufferMovePrevious<CR>', { desc = 'Move tab left' })
+vim.keymap.set('n', '<C-.>', '<cmd>BufferMoveNext<CR>', { desc = 'Move tab right' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -193,7 +195,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -571,7 +573,7 @@ require('lazy').setup({
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -913,7 +915,13 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    config = function()
+      vim.cmd 'colorscheme rose-pine-moon'
     end,
   },
 
@@ -998,6 +1006,8 @@ require('lazy').setup({
       require('mini.surround').setup()
 
       require('mini.pairs').setup()
+
+      require('mini.operators').setup()
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,

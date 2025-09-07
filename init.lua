@@ -107,9 +107,20 @@ vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
-vim.o.relativenumber = true
+
+-- Define keymap to toggele relative lines on and off
+-- [l]ine [r]elative
+vim.keymap.set('n', '<leader>lr', function()
+  vim.opt.relativenumber = true
+end, { desc = 'Relative line number' })
+
+-- [l]ine [n]ormal
+vim.keymap.set('n', '<leader>ln', function()
+  vim.opt.relativenumber = false
+end, { desc = 'Normal line numbers' })
+
+-- Make line numbers relative by default
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'

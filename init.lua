@@ -185,8 +185,8 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 -- Tab size
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
+-- vim.o.softtabstop = 4
+-- vim.o.shiftwidth = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -1055,7 +1055,7 @@ require('lazy').setup({
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = { 'ruby', 'typescript', 'javascript', 'tsx', 'jsx' } },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:

@@ -185,8 +185,8 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 -- Tab size
--- vim.o.softtabstop = 4
--- vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -806,7 +806,7 @@ require('lazy').setup({
           return nil
         else
           return {
-            timeout_ms = 500,
+            timeout_ms = 1500,
             lsp_format = 'fallback',
           }
         end

@@ -202,6 +202,13 @@ vim.keymap.set('n', '<C-.>', '<cmd>BufferMoveNext<CR>', { desc = 'Move tab right
 vim.keymap.set('n', '<leader>tq', '<cmd>BufferClose<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>tr', '<cmd>BufferRestore<CR>', { desc = 'Restore buffer' })
 
+-- Diffview keymaps
+vim.keymap.set('n', '<leader>gdo', '<cmd>DiffviewOpen<CR>', { desc = 'Diff view open' })
+vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<CR>', { desc = 'Diff view close' })
+vim.keymap.set('n', '<leader>gdl', '<cmd>DiffviewLog<CR>', { desc = 'Diff view log' })
+vim.keymap.set('n', '<leader>gdf', '<cmd>DiffviewFileHistory<CR>', { desc = 'Diff view file history' })
+vim.keymap.set('n', '<leader>gdr', '<cmd>DiffviewRefresh<CR>', { desc = 'Diff view refresh' })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')

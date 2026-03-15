@@ -526,6 +526,14 @@ require('lazy').setup({
       },
     },
   },
+  -- lazy.nvim
+  {
+    'GustavEikaas/easy-dotnet.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('easy-dotnet').setup()
+    end,
+  },
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -828,6 +836,8 @@ require('lazy').setup({
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
+        cs = { 'csharpier', stop_after_first = true },
       },
     },
   },
